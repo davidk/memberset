@@ -24,7 +24,6 @@ func TestDifferentType(t *testing.T) {
   m := NewMemberSet()
 
   m.Add(9999)
-
   if ok := m.Get(9999); !ok {
     t.Error("Did not store integer 9999.")
   }
@@ -52,6 +51,7 @@ func TestStringAddDelete(t *testing.T) {
 }
 
 func TestIntSet(t *testing.T) {
+
   testSet := NewMemberSet()
 
   testSet.Add(1234)
@@ -62,6 +62,17 @@ func TestIntSet(t *testing.T) {
   testSet.Set(4567)
   if ok := testSet.Get(4567); !ok {
     t.Errorf("Unable to find ID 4567 in output")
+  }
+
+}
+
+func TestInt64Set(t *testing.T) {
+
+  testSet := NewMemberSet()
+
+  testSet.Add(int64(4444))
+  if ok := testSet.Get(int64(4444)); !ok {
+    t.Error("Unable to add int64(4444) to set")
   }
 
 }
@@ -87,6 +98,7 @@ func BenchmarkSet(b *testing.B) {
   for i := 0; i < b.N; i++ {
     testSet.Set(i)
   }
+
 }
 
 func BenchmarkGet(b *testing.B) {
@@ -107,4 +119,38 @@ func BenchmarkDelete(b *testing.B) {
     testSet.Delete(i)
   }
 
+}
+
+func BenchmarkAddDelete(b *testing.B) {
+
+  testSet := NewMemberSet()
+
+  for i := 0; i < b.N; i++ {
+    testSet.Add(i)
+    testSet.Delete(i)
+  }
+
+}
+
+func BenchmarkAddGet(b *testing.B) {
+
+  testSet := NewMemberSet()
+
+  for i := 0; i < b.N; i++ {
+    testSet.Add(i)
+    testSet.Get(i)
+  }
+
+}
+
+func BenchmarkAddGetDelete(b *testing.B) {
+
+  testSet := NewMemberSet()
+
+  for i := 0; i < b.N; i++ {
+    testSet.Add(i)
+    testSet.Get(i)
+    testSet.Delete(i)
+  }
+  
 }
