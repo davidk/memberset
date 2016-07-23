@@ -6,16 +6,31 @@ import (
 
 func TestSetAddDelete(t *testing.T) {
 
-  testSet := NewMemberSet()
+  m := NewMemberSet()
 
-  testSet.Add(1234)
-  if ok := testSet.Get(1234); !ok {
+  m.Add(1234)
+  if ok := m.Get(1234); !ok {
     t.Errorf("Unable to find 1234 in output")
   }
 
-  testSet.Delete(1234)
-  if ok := testSet.Get(1234); ok {
+  m.Delete(1234)
+  if ok := m.Get(1234); ok {
     t.Errorf("1234 was not deleted.")
+  }
+
+}
+
+func TestDifferentType(t *testing.T) {
+  m := NewMemberSet()
+
+  m.Add(9999)
+
+  if ok := m.Get(9999); !ok {
+    t.Error("Did not store integer 9999.")
+  }
+
+  if ok := m.Get("9999"); ok {
+    t.Error("Returned OK on integer value, when asking for a string value.")
   }
 
 }

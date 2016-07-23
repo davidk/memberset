@@ -3,7 +3,16 @@
   == gopher-membership ==
 
   A very simple library for membership testing.
-  Add a key and get it back quickly.
+
+  Get started by vendoring or using go get github.com/davidk/memberset
+
+  m := memberset.NewMemberSet()
+  m.Add("123")
+
+  # Is string "123" a member?
+  if ok := m.Get("123"); ok {
+    // Yes
+  }
 
 */
 
