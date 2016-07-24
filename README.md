@@ -10,12 +10,12 @@ A simple set used for testing memberships in Go.
 
     import "github.com/davidk/memberset"
 
-    m := memberset.NewMemberSet()
+    m := memberset.New()
 
     // Other types are also acceptable, like ints
     m.Add("123")
 
-    # Is string "123" a member?
+    // Is string "123" a member?
     if ok := m.Get("123"); ok {
       // Yes
     } else {

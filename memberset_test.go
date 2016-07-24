@@ -6,7 +6,7 @@ import (
 
 func TestSetAddDelete(t *testing.T) {
 
-  m := NewMemberSet()
+  m := New()
 
   m.Add(1234)
   if ok := m.Get(1234); !ok {
@@ -21,7 +21,7 @@ func TestSetAddDelete(t *testing.T) {
 }
 
 func TestDifferentType(t *testing.T) {
-  m := NewMemberSet()
+  m := New()
 
   m.Add(9999)
   if ok := m.Get(9999); !ok {
@@ -36,7 +36,7 @@ func TestDifferentType(t *testing.T) {
 
 func TestStringAddDelete(t *testing.T) {
 
-  testSet := NewMemberSet()
+  testSet := New()
 
   testSet.Add("cake")
   if ok := testSet.Get("cake"); !ok {
@@ -52,7 +52,7 @@ func TestStringAddDelete(t *testing.T) {
 
 func TestIntSet(t *testing.T) {
 
-  testSet := NewMemberSet()
+  testSet := New()
 
   testSet.Add(1234)
   if ok := testSet.Get(1234); !ok {
@@ -68,7 +68,7 @@ func TestIntSet(t *testing.T) {
 
 func TestInt64Set(t *testing.T) {
 
-  testSet := NewMemberSet()
+  testSet := New()
 
   testSet.Add(int64(4444))
   if ok := testSet.Get(int64(4444)); !ok {
@@ -82,7 +82,7 @@ func TestInt64Set(t *testing.T) {
 // Aliased to Set()
 func BenchmarkAdd(b *testing.B) {
 
-  testSet := NewMemberSet()
+  testSet := New()
 
   for i := 0; i < b.N; i++ {
     testSet.Add(i)
@@ -93,7 +93,7 @@ func BenchmarkAdd(b *testing.B) {
 // Non-aliased
 func BenchmarkSet(b *testing.B) {
 
-  testSet := NewMemberSet()
+  testSet := New()
 
   for i := 0; i < b.N; i++ {
     testSet.Set(i)
@@ -103,7 +103,7 @@ func BenchmarkSet(b *testing.B) {
 
 func BenchmarkGet(b *testing.B) {
 
-  testSet := NewMemberSet()
+  testSet := New()
 
   for i := 0; i < b.N; i++ {
     testSet.Get(i)
@@ -113,7 +113,7 @@ func BenchmarkGet(b *testing.B) {
 
 func BenchmarkDelete(b *testing.B) {
 
-  testSet := NewMemberSet()
+  testSet := New()
 
   for i := 0; i < b.N; i++ {
     testSet.Delete(i)
@@ -123,7 +123,7 @@ func BenchmarkDelete(b *testing.B) {
 
 func BenchmarkAddDelete(b *testing.B) {
 
-  testSet := NewMemberSet()
+  testSet := New()
 
   for i := 0; i < b.N; i++ {
     testSet.Add(i)
@@ -134,7 +134,7 @@ func BenchmarkAddDelete(b *testing.B) {
 
 func BenchmarkAddGet(b *testing.B) {
 
-  testSet := NewMemberSet()
+  testSet := New()
 
   for i := 0; i < b.N; i++ {
     testSet.Add(i)
@@ -145,12 +145,12 @@ func BenchmarkAddGet(b *testing.B) {
 
 func BenchmarkAddGetDelete(b *testing.B) {
 
-  testSet := NewMemberSet()
+  testSet := New()
 
   for i := 0; i < b.N; i++ {
     testSet.Add(i)
     testSet.Get(i)
     testSet.Delete(i)
   }
-  
+
 }

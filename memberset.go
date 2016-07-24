@@ -27,7 +27,7 @@ type MemberSet struct {
   m map[interface{}]struct{}
 }
 
-func NewMemberSet() *MemberSet {
+func New() *MemberSet {
   return &MemberSet{ m: make(map[interface{}]struct{}) }
 }
 
