@@ -77,6 +77,17 @@ func TestInt64Set(t *testing.T) {
 
 }
 
+func TestMultiAdd(t *testing.T) {
+  testSet := New()
+  testSet.Add("1234")
+  testSet.Add("1234")
+  testSet.Add("1234")
+  testSet.Add("1234")
+  if ok := testSet.Get("1234"); !ok {
+    t.Error("Unable to get string1234 from set")
+  }
+}
+
 /* === Benchmarks === */
 
 // Aliased to Set()

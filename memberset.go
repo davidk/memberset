@@ -1,18 +1,21 @@
-/*
+/* Package memberset is a simple set used for testing memberships in Go.
 
-  == gopher-membership ==
+  import "github.com/davidk/memberset"
 
-  A very simple library for membership testing.
+  m := memberset.New()
 
-  Get started by vendoring or using go get github.com/davidk/memberset
-
-  m := memberset.NewMemberSet()
+  // Other types are also acceptable, like ints
   m.Add("123")
 
-  # Is string "123" a member?
+  // Is string "123" a member?
   if ok := m.Get("123"); ok {
     // Yes
+  } else {
+    // No
   }
+
+  // To remove "123" from the set
+  m.Delete("123")
 
 */
 
@@ -27,12 +30,13 @@ type MemberSet struct {
   m map[interface{}]struct{}
 }
 
+// New() initializes a new MemberSet
 func New() *MemberSet {
   return &MemberSet{ m: make(map[interface{}]struct{}) }
 }
 
-// Get() shouldn't necessarily care what type is there,
-// just as long as it matches what was given in Set()
+// Get() looks for an item in the set. It doesn't really retrieve
+// anything, just checks for existence.
 func (s *MemberSet) Get (value interface{}) (bool) {
   defer s.RUnlock()
   s.RLock()
@@ -44,17 +48,19 @@ func (s *MemberSet) Get (value interface{}) (bool) {
   return false
 }
 
-
+// Add is an alias to Set()
 func (s *MemberSet) Add (value interface{}) {
   s.Set(value)
 }
 
+// Set() adds the value to the set
 func (s *MemberSet) Set (value interface{}) {
   s.Lock()
   s.m[value] = struct{}{}
   s.Unlock()
 }
 
+// Delete() removes the value from the set
 func (s *MemberSet) Delete (value interface{}) {
   s.Lock()
   delete(s.m, value)
