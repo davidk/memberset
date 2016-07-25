@@ -7,4 +7,12 @@ services:
       - GOPATH=/usr/local/go/src/github.com/davidk/memberset
     volumes:
       - "./:/usr/local/go/src/github.com/davidk/memberset:z"
-    command: sh -c "go version && go test -v -bench=. -benchmem -coverprofile=coverage.out github.com/davidk/memberset && go tool cover -html=coverage.out -o coverage.html"
+    command: sh -c "go version && go test -v -bench=. -benchmem -coverprofile=coverage.out && go tool cover -html=coverage.out -o coverage.html"
+#  linter:
+#    build: .
+#    working_dir: /usr/local/go/src/github.com/davidk/memberset
+#    environment:
+#      - GOPATH=/usr/local/go/src/github.com/davidk/memberset
+#    volumes:
+#      - "./:/usr/local/go/src/github.com/davidk/memberset:z"
+#    command: sh -c "golint github.com/davidk/memberset"
