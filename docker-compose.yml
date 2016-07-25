@@ -1,10 +1,10 @@
 version: '2'
 services:
   golang:
-    image: golang:latest
+    image: golang:alpine
     working_dir: /usr/local/go/src/github.com/davidk/memberset
     environment:
       - GOPATH=/usr/local/go/src/github.com/davidk/memberset
     volumes:
       - "./:/usr/local/go/src/github.com/davidk/memberset:z"
-    command: bash -c "go test -v -bench=. -benchmem -race -coverprofile=coverage.out github.com/davidk/memberset && go tool cover -html=coverage.out -o coverage.html"
+    command: sh -c "go version && go test -v -bench=. -benchmem -coverprofile=coverage.out github.com/davidk/memberset && go tool cover -html=coverage.out -o coverage.html"
