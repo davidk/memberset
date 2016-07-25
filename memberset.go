@@ -1,26 +1,25 @@
 /*
+Package memberset is a simple set used for testing memberships in Go.
 
-  Package memberset is a simple set used for testing memberships in Go.
+import "github.com/davidk/memberset"
 
-  import "github.com/davidk/memberset"
+m := memberset.New()
 
-  m := memberset.New()
+// Other types are also acceptable, like ints
 
-  // Other types are also acceptable, like ints
-  
-  m.Add("123")
+m.Add("123")
 
-  // Is string "123" a member?
+// Is string "123" a member?
 
-  if ok := m.Get("123"); ok {
-    // Yes
-  } else {
-    // No
-  }
+if ok := m.Get("123"); ok {
+  // Yes
+} else {
+  // No
+}
 
-  // To remove "123" from the set
+// To remove "123" from the set
 
-  m.Delete("123")
+m.Delete("123")
 
 */
 package memberset
@@ -29,7 +28,7 @@ import (
   "sync"
 )
 
-// Memberset wraps up a map[interface{}]struct{} for ease of use.
+// MemberSet wraps up a map[interface{}]struct{} for ease of use.
 type MemberSet struct {
   sync.RWMutex
   m map[interface{}]struct{}
