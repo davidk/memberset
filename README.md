@@ -25,6 +25,16 @@ A simple set used for testing memberships in Go.
     // To remove "123" from the set
     m.Delete("123")
 
+# Related
+
+There are other projects that have more through set implementations. Check these out:
+
+* [deckarep/golang-set](https://github.com/deckarep/golang-set)
+
+* [faith/set](https://github.com/fatih/set)
+
+And [a proposal](https://github.com/golang/go/issues/16466) on golang/go to add a built-in set type.
+
 # License
 
 [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
