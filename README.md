@@ -7,24 +7,30 @@ A simple set used for testing memberships in Go.
 
 # Usage
 
-### Get started by vendoring or by using `go get github.com/davidk/memberset`
-
     import "github.com/davidk/memberset"
 
     m := memberset.New()
 
-    // Other types are also acceptable, like ints
+    // Adding a value into the set is just a m.Add() call
+    // Other types are also acceptable, like ints, floats, etc (as long as it works with an interface{})
     m.Add("123")
+    
+    // If it helps your mnemonic memory, m.Add() is just an alias to m.Set()
+    m.Set(123) // <--- This is the same as m.Add(123)
 
-    // Is string "123" a member?
+    // Eventually, we'll need to check to see if what we added is present in the set
     if ok := m.Get("123"); ok {
-      // Yes
+      // Yes, do something
     } else {
-      // No
+      // No, do something else
     }
 
-    // To remove "123" from the set
+    // And maybe we'll need to remove "123" from the set
     m.Delete("123")
+
+# Installation
+
+### Get started by vendoring or by using `go get -u github.com/davidk/memberset`
 
 # Related
 
