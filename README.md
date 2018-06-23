@@ -3,30 +3,59 @@
 [![Build Status](https://travis-ci.org/davidk/memberset.svg?branch=master)](https://travis-ci.org/davidk/memberset)
 [![GoDoc](https://godoc.org/github.com/davidk/memberset?status.svg)](https://godoc.org/github.com/davidk/memberset)
 
-A simple set used for testing memberships in Go.
+A simple, in-memory set used for storing and testing memberships in Go.
 
 # Usage
 
-    import "github.com/davidk/memberset"
+Sample program:
 
-    m := memberset.New()
+```go
+    package main
 
-    // Adding a value into the set is just a m.Add() call
-    // Other types are also acceptable, like ints, floats, etc (as long as it works with an interface{})
-    m.Add("123")
-    
-    // If it helps your mnemonic memory, m.Add() is just an alias to m.Set()
-    m.Set(123) // <--- This is the same as m.Add(123)
+    import (
+        "fmt"
+        set "github.com/davidk/memberset"
+    )
 
-    // Eventually, we'll need to check to see if what we added is present in the set
-    if ok := m.Get("123"); ok {
-      // Yes, do something
-    } else {
-      // No, do something else
+    func main() {
+
+        m := set.New()
+        
+        m.Set(123)
+
+        if ok := m.Get(123); ok {
+            fmt.Println("Yes, 123 is a part of the set")
+        } else {
+            fmt.Println("Nope, didn't find 123 in the set")
+        }
+
+        // m.Add == m.Set -- this is mostly for mnemonic memory
+        m.Add("1234")
+
+        if ok := m.Get("1234"); ok {
+            fmt.Println("Yes, string 1234 has been added to the set")
+        }
+
+        m.Delete("1234")
+
+        if ok := m.Get("1234"); ok {
+            fmt.Println("Nope, string 1234 is still set. This is a bug.")
+        } else {
+            fmt.Println("Looks like string 1234 was successfully deleted!")
+        }
+
     }
+```
 
-    // And maybe we'll need to remove "123" from the set
-    m.Delete("123")
+Expected output:
+
+```bash
+    $ go build mtest.go
+    $ ./mtest
+    Yes, 123 is a part of the set
+    Yes, string 1234 has been added to the set
+    Looks like string 1234 was successfully deleted!
+```
 
 # Installation
 
