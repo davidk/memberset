@@ -69,7 +69,7 @@ There are other projects that have more through set implementations. Check these
 
 * [faith/set](https://github.com/fatih/set)
 
-And [a proposal](https://github.com/golang/go/issues/16466) on golang/go to add a built-in set type.
+And [a proposal](https://github.com/golang/go/issues/16466) on golang/go to add a built-in set type. There's a link to a [playground entry](https://play.golang.org/p/VhCbdtJzwz) with a complete set implementation.
 
 # License
 
