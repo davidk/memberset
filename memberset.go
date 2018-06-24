@@ -1,26 +1,41 @@
 /*
 Package memberset is a simple set used for testing memberships in Go.
 
-import "github.com/davidk/memberset"
+package main
 
-m := memberset.New()
+import (
+    "fmt"
+    set "github.com/davidk/memberset"
+)
 
-// Other types are also acceptable, like ints
+func main() {
 
-m.Add("123")
+    m := set.New()
+    
+    m.Set(123)
 
-// Is string "123" a member?
+    if ok := m.Get(123); ok {
+        fmt.Println("Yes, 123 is a part of the set")
+    } else {
+        fmt.Println("Nope, didn't find 123 in the set")
+    }
 
-if ok := m.Get("123"); ok {
-  // Yes
-} else {
-  // No
+    // m.Add == m.Set -- this is mostly for mnemonic memory
+    m.Add("1234")
+
+    if ok := m.Get("1234"); ok {
+        fmt.Println("Yes, string 1234 has been added to the set")
+    }
+
+    m.Delete("1234")
+
+    if ok := m.Get("1234"); ok {
+        fmt.Println("Nope, string 1234 is still set. This is a bug.")
+    } else {
+        fmt.Println("Looks like string 1234 was successfully deleted!")
+    }
+
 }
-
-// To remove "123" from the set
-
-m.Delete("123")
-
 */
 package memberset
 

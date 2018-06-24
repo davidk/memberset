@@ -10,51 +10,51 @@ A simple, in-memory set used for storing and testing memberships in Go.
 Sample program:
 
 ```go
-    package main
+package main
 
-    import (
-        "fmt"
-        set "github.com/davidk/memberset"
-    )
+import (
+    "fmt"
+    set "github.com/davidk/memberset"
+)
 
-    func main() {
+func main() {
 
-        m := set.New()
-        
-        m.Set(123)
+    m := set.New()
+    
+    m.Set(123)
 
-        if ok := m.Get(123); ok {
-            fmt.Println("Yes, 123 is a part of the set")
-        } else {
-            fmt.Println("Nope, didn't find 123 in the set")
-        }
-
-        // m.Add == m.Set -- this is mostly for mnemonic memory
-        m.Add("1234")
-
-        if ok := m.Get("1234"); ok {
-            fmt.Println("Yes, string 1234 has been added to the set")
-        }
-
-        m.Delete("1234")
-
-        if ok := m.Get("1234"); ok {
-            fmt.Println("Nope, string 1234 is still set. This is a bug.")
-        } else {
-            fmt.Println("Looks like string 1234 was successfully deleted!")
-        }
-
+    if ok := m.Get(123); ok {
+        fmt.Println("Yes, 123 is a part of the set")
+    } else {
+        fmt.Println("Nope, didn't find 123 in the set")
     }
+
+    // m.Add == m.Set -- this is mostly for mnemonic memory
+    m.Add("1234")
+
+    if ok := m.Get("1234"); ok {
+        fmt.Println("Yes, string 1234 has been added to the set")
+    }
+
+    m.Delete("1234")
+
+    if ok := m.Get("1234"); ok {
+        fmt.Println("Nope, string 1234 is still set. This is a bug.")
+    } else {
+        fmt.Println("Looks like string 1234 was successfully deleted!")
+    }
+
+}
 ```
 
 Expected output:
 
 ```bash
-    $ go build mtest.go
-    $ ./mtest
-    Yes, 123 is a part of the set
-    Yes, string 1234 has been added to the set
-    Looks like string 1234 was successfully deleted!
+$ go build mtest.go
+$ ./mtest
+Yes, 123 is a part of the set
+Yes, string 1234 has been added to the set
+Looks like string 1234 was successfully deleted!
 ```
 
 # Installation
