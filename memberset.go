@@ -11,7 +11,7 @@ import (
 func main() {
 
     m := set.New()
-    
+
     m.Set(123)
 
     if ok := m.Get(123); ok {
@@ -40,48 +40,48 @@ func main() {
 package memberset
 
 import (
-  "sync"
+	"sync"
 )
 
 // MemberSet wraps up a map[interface{}]struct{} for ease of use.
 type MemberSet struct {
-  sync.RWMutex
-  m map[interface{}]struct{}
+	sync.RWMutex
+	m map[interface{}]struct{}
 }
 
 // New initializes a new MemberSet
 func New() *MemberSet {
-  return &MemberSet{ m: make(map[interface{}]struct{}) }
+	return &MemberSet{m: make(map[interface{}]struct{})}
 }
 
 // Get looks for an item in the set. It doesn't really retrieve
 // anything, just checks for existence.
-func (s *MemberSet) Get (value interface{}) (bool) {
-  defer s.RUnlock()
-  s.RLock()
+func (s *MemberSet) Get(value interface{}) bool {
+	defer s.RUnlock()
+	s.RLock()
 
-  if _, ok := s.m[value]; ok {
-    return true
-  }
+	if _, ok := s.m[value]; ok {
+		return true
+	}
 
-  return false
+	return false
 }
 
 // Add is an alias to Set()
-func (s *MemberSet) Add (value interface{}) {
-  s.Set(value)
+func (s *MemberSet) Add(value interface{}) {
+	s.Set(value)
 }
 
 // Set adds a value to the set
-func (s *MemberSet) Set (value interface{}) {
-  s.Lock()
-  s.m[value] = struct{}{}
-  s.Unlock()
+func (s *MemberSet) Set(value interface{}) {
+	s.Lock()
+	s.m[value] = struct{}{}
+	s.Unlock()
 }
 
 // Delete removes the value from the set
-func (s *MemberSet) Delete (value interface{}) {
-  s.Lock()
-  delete(s.m, value)
-  s.Unlock()
+func (s *MemberSet) Delete(value interface{}) {
+	s.Lock()
+	delete(s.m, value)
+	s.Unlock()
 }
