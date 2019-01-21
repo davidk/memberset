@@ -1,5 +1,6 @@
 # memberset
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/davidk/memberset)](https://goreportcard.com/report/github.com/davidk/memberset)
 [![Build Status](https://travis-ci.org/davidk/memberset.svg?branch=master)](https://travis-ci.org/davidk/memberset)
 [![GoDoc](https://godoc.org/github.com/davidk/memberset?status.svg)](https://godoc.org/github.com/davidk/memberset)
 
